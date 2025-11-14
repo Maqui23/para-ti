@@ -2,474 +2,323 @@
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Para Coral</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Para Coral❤️</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        body {
-            margin: 0;
-            padding: 0;
-            background: radial-gradient(circle at center, #0a0026, #000);
-            animation: fondo 10s infinite alternate;
-            color: white;
-            font-family: Arial, sans-serif;
-            overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            height: 100vh;
+        :root {
+            --pink: #ff2d9c;
+            --bg1: #0a0026;
+            --bg2: #300070
         }
 
-        @keyframes fondo {
-            0% {
-                background: radial-gradient(circle at center, #160040, #000);
-            }
+        html,
+        body {
+            height: 100%
+        }
 
-            100% {
-                background: radial-gradient(circle at center, #300070, #000);
-            }
+        body {
+            margin: 0;
+            background: radial-gradient(circle at center, var(--bg1), #000);
+            color: #fff;
+            font-family: Inter, system-ui, Arial;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding: 1rem
+        }
+
+        .stage {
+            width: 100%;
+            max-width: 1200px;
+            height: 82vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center
         }
 
         #blackhole {
-            position: fixed;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
             width: 0;
             height: 0;
             border-radius: 50%;
             background: radial-gradient(circle, #000 10%, #111 35%, #ff00ff 90%, transparent 100%);
             box-shadow: 0 0 220px #ff00ff;
-            transition: all 0.8s ease;
-            z-index: 2;
+            transition: all .8s ease;
+            z-index: 2
         }
 
         #foto {
-            max-width: 70vw;
-            max-height: 70vh;
-            border-radius: 15px;
-            box-shadow: 0 0 55px #ff66ff;
+            max-width: 70%;
+            max-height: 70%;
+            border-radius: 16px;
+            box-shadow: 0 8px 60px rgba(255, 102, 255, .25);
             opacity: 0;
-            transition: opacity 1s;
-            animation: latido 2s infinite alternate, zoom 6s infinite;
-            z-index: 4;
+            transition: opacity .8s;
+            z-index: 3
         }
 
-        #boton,
-        #reiniciar {
-            padding: 15px 25px;
-            font-size: 22px;
-            border: none;
-            border-radius: 12px;
-            background: #ff0080;
-            color: white;
-            cursor: pointer;
-            margin-bottom: 20px;
-            transition: 0.3s;
-            z-index: 5;
-        }
-
-        #boton:hover,
-        #reiniciar:hover {
-            background: #ff33aa;
+        .controls {
+            position: relative;
+            z-index: 6;
+            display: flex;
+            gap: .75rem;
+            align-items: center
         }
 
         #mensajeFinal {
             display: none;
-            font-size: 28px;
+            z-index: 5;
+            position: absolute;
+            bottom: 6vh;
+            background: linear-gradient(90deg, rgba(0, 0, 0, .6), rgba(30, 0, 40, .6));
+            padding: 1.2rem 1.6rem;
+            border-radius: 12px;
+            max-width: 80%;
             text-align: center;
-            max-width: 90vw;
-            line-height: 1.5;
-            animation: brillo 2.5s infinite alternate;
-            z-index: 4;
+            font-size: 1.15rem;
+            box-shadow: 0 6px 40px rgba(0, 0, 0, .6);
+            animation: brillo 2.5s infinite alternate
         }
 
         @keyframes brillo {
-            0% {
-                text-shadow: 0 0 10px #ff33cc;
+            from {
+                text-shadow: 0 0 10px #ff33cc
             }
 
-            100% {
-                text-shadow: 0 0 25px #ff99ff;
+            to {
+                text-shadow: 0 0 25px #ff99ff
             }
         }
 
         .corazon {
             position: fixed;
-            width: 20px;
-            height: 20px;
-            background: pink;
+            width: 18px;
+            height: 18px;
+            background: var(--pink);
             transform: rotate(45deg);
-            animation: flotar 6s linear infinite;
+            border-radius: 2px;
+            z-index: 4
         }
 
         .corazon:before,
         .corazon:after {
             content: "";
             position: absolute;
-            width: 20px;
-            height: 20px;
-            background: pink;
-            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            background: var(--pink);
+            border-radius: 50%
         }
 
         .corazon:before {
-            top: -10px;
-            left: 0;
+            top: -9px;
+            left: 0
         }
 
         .corazon:after {
-            left: -10px;
-            top: 0;
-        }
-
-        @keyframes flotar {
-            0% {
-                transform: translateY(0) rotate(45deg);
-                opacity: 1;
-            }
-
-            100% {
-                transform: translateY(-250px) rotate(45deg);
-                opacity: 0;
-            }
+            left: -9px;
+            top: 0
         }
 
         .estrella {
             position: fixed;
             width: 3px;
             height: 3px;
-            background: white;
+            background: #fff;
             border-radius: 50%;
-            opacity: 0.8;
-            animation: brillar 2s infinite alternate;
-        }
-
-        @keyframes brillar {
-            0% {
-                opacity: 0.3;
-            }
-
-            100% {
-                opacity: 1;
-            }
+            opacity: .8;
+            z-index: 1
         }
 
         .fugaz {
             position: fixed;
             width: 120px;
             height: 3px;
-            background: white;
+            background: #fff;
             transform: rotate(-45deg);
             opacity: 0;
-            animation: fugaz 2s linear;
-        }
-
-        @keyframes fugaz {
-            0% {
-                opacity: 1;
-                transform: translateX(0) translateY(0) rotate(-45deg);
-            }
-
-            100% {
-                opacity: 0;
-                transform: translateX(400px) translateY(-400px) rotate(-45deg);
-            }
+            z-index: 1
         }
 
         .particula {
             position: absolute;
             width: 6px;
             height: 6px;
+            border-radius: 50%;
             background: #ff66ff;
-            border-radius: 50%;
-            animation: part 1.5s linear infinite;
+            z-index: 4
         }
 
-        @keyframes part {
-            0% {
-                opacity: 1;
-                transform: scale(1);
-            }
-
-            100% {
-                opacity: 0;
-                transform: scale(2);
-            }
-        }
-
-        @keyframes latido {
-            0% {
-                transform: scale(1);
-            }
-
-            100% {
-                transform: scale(1.05);
-            }
-        }
-
-        @keyframes zoom {
-            0% {
-                transform: scale(1);
-            }
-
-            100% {
-                transform: scale(1.12);
-            }
-        }
-
-        .boomCorazones {
+        #introOverlay {
             position: fixed;
-            width: 15px;
-            height: 15px;
-            background: #ff99cc;
-            transform: rotate(45deg);
-            animation: explotar 1.2s ease-out forwards;
+            inset: 0;
+            background: rgba(0, 0, 0, .98);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 20
         }
 
-        .boomCorazones:before,
-        .boomCorazones:after {
-            content: "";
-            position: absolute;
-            width: 15px;
-            height: 15px;
-            background: #ff99cc;
-            border-radius: 50%;
+        #introOverlay h1 {
+            font-size: 2rem;
+            margin-bottom: .75rem
         }
 
-        .boomCorazones:before {
-            top: -8px;
-            left: 0;
+        #introOverlay p {
+            opacity: .9
         }
 
-        .boomCorazones:after {
-            left: -8px;
-            top: 0;
-        }
-
-        @keyframes explotar {
-            0% {
-                opacity: 1;
-                transform: scale(0.5) translate(0, 0);
+        @media(max-width:768px) {
+            #foto {
+                max-width: 90%;
+                max-height: 60%
             }
 
-            100% {
-                opacity: 0;
-                transform: scale(2) translate(var(--x), var(--y));
+            #mensajeFinal {
+                font-size: 1rem
             }
+        }
+
+        .visually-hidden {
+            position: absolute !important;
+            height: 1px;
+            width: 1px;
+            overflow: hidden;
+            clip: rect(1px, 1px, 1px, 1px);
+            white-space: nowrap
         }
     </style>
 </head>
 
 <body>
-    <button id="boton">Comenzar</button>
-    <button id="reiniciar" style="display:none;">Reiniciar</button>
-
-    <div id="blackhole"></div>
-    <img id="foto" src="" />
-
-    <div id="mensajeFinal">
-        Con muchísimo cariño, de parte de tu Alechi. ❤️<br><br>
-        Coral, eres la luz más hermosa que ilumina mis días, mi compañera de aventuras, mi alegría constante.<br><br>
-        Gracias por cada risa, cada abrazo, cada momento que compartimos. ❤️<br>
-        Deseo que sigamos construyendo recuerdos hermosos, viajando, sonriendo, soñando…<br><br>
-        ¡Y que sean muchos, muchos años más juntos! ❤️✨💫<br><br>
-        Te amo con todo mi corazón. — Alechi 💕
+    <nav class="navbar navbar-expand-lg bg-transparent w-100 position-absolute top-0 start-0" style="z-index:30">
+        <div class="container-fluid justify-content-between">
+            <div class="d-flex align-items-center gap-2">
+                <button id="boton" class="btn btn-lg btn-outline-light">Comenzar</button>
+                <button id="reiniciar" class="btn btn-lg btn-outline-light" style="display:none">Reiniciar</button>
+                <button id="playPause" class="btn btn-light btn-sm">🔊</button>
+            </div>
+            <div class="d-flex align-items-center gap-2">
+                <button class="btn btn-sm btn-outline-light" data-bs-toggle="modal"
+                    data-bs-target="#secretModal">Mensaje secreto</button>
+                <a class="btn btn-sm btn-primary" href="https://github.com/Maqui23/para-ti" target="_blank">Repo</a>
+            </div>
+        </div>
+    </nav>
+    <div class="stage">
+        <div id="blackhole"></div>
+        <img id="foto" src="" alt="foto" />
+        <div id="mensajeFinal" class="shadow-lg">
+            Coral, mi amor…<br><br>No hay día en el que no agradezca por ti. Tus abrazos son mi hogar, tu risa es mi
+            canción favorita y tu corazón… mi lugar seguro. 💗<br><br>Quiero seguir celebrando cada momento a tu lado:
+            tus ocurrencias, tus sueños, tus locuras hermosas y todo lo que nos hace únicos. 💕<br><br>Gracias por
+            enseñarme que amar también es reír, es confiar, es construir algo bonito y real juntos.<br><br>Te adoro más
+            de lo que mis palabras pueden describir. — Tu Alechi 🌙✨
+        </div>
     </div>
-
-    <!-- 🎵 AUDIO (actualizado con fade-in) -->
-    <audio id="musica" src="audio/cancion.mp3"></audio>
-
+    <audio id="musica" preload="auto" playsinline></audio>
+    <div class="modal fade" id="secretModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content bg-dark text-white">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title">Ingrese código secreto</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <input id="secretInput" class="form-control" placeholder="Escribe el código...">
+                    <div id="secretHint" class="form-text text-white-50 mt-2">Pista: un detalle romántico</div>
+                </div>
+                <div class="modal-footer border-0">
+                    <button id="secretCheck" class="btn btn-primary">Ver mensaje</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="secretResult" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content bg-dark text-white">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title">Mensaje secreto</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Mi Coral preciosa…</p>
+                    <p>Este mensaje escondido es para la versión más curiosa de ti. Eres mi detalle favorito, mi
+                        casualidad más bonita y la razón por la que cada día intento ser mejor.</p>
+                    <p>Gracias por mirar mi alma como si fuera algo digno de admirarse. Eres magia pura.</p>
+                    <p class="mb-0"><strong>Con todo de mí… Alechi 💞</strong></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="introOverlay">
+        <h1>Coral…</h1>
+        <p>Antes de que empiece la magia, solo quiero que sepas algo: esta página existe porque tú existes en mi vida.
+            ❤️</p>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        const fotos = [
-            "mua.jpg",
-            "hola.jpg",
-            "20250610_174841.jpg",
-            "20250711_172827.jpg",
-            "IMG_20250816_174804.jpg",
-            "IMG_20251104_212949.jpg",
-            "IMG_20251104_213009.jpg",
-            "IMG_20251104_213027.jpg",
-            "IMG_20251109_211455.jpg",
-            "IMG_20251109_211919.jpg",
-            "IMG_20251109_212343.jpg",
-            "IMG_20251109_212623.jpg",
-            "IMG-20250603-WA0067.jpg",
-            "IMG-20251101-WA0008.jpg",
-            "IMG-20251110-WA0031.jpg",
-            "Screenshot_20250610_194501_WhatsApp.jpg"
-        ];
+        const fotos = ["mua.jpg", "hola.jpg", "20250610_174841.jpg", "20250711_172827.jpg", "IMG_20250816_174804.jpg", "IMG_20251104_212949.jpg", "IMG_20251104_213009.jpg", "IMG_20251104_213027.jpg", "IMG_20251109_211455.jpg", "IMG_20251109_211919.jpg", "IMG_20251109_212343.jpg", "IMG_20251109_212623.jpg", "IMG-20250603-WA0067.jpg", "IMG-20251101-WA0008.jpg", "IMG-20251110-WA0031.jpg", "Screenshot_20250610_194501_WhatsApp.jpg"];
+        let index = 0; const foto = document.getElementById('foto'); const boton = document.getElementById('boton'); const reiniciar = document.getElementById('reiniciar'); const blackhole = document.getElementById('blackhole'); const mensajeFinal = document.getElementById('mensajeFinal'); const musica = document.getElementById('musica'); const playPause = document.getElementById('playPause');
+        const canciones = ["audio/cancion1.mp3", "audio/cancion2.mp3", "audio/cancion3.mp3"]; let actual = 0;
+        function iniciarMusica() { actual = Math.floor(Math.random() * canciones.length); musica.src = canciones[actual]; musica.volume = 0; musica.play().then(() => { let v = 0; const fade = setInterval(() => { v += 0.02; musica.volume = Math.min(1, v); if (v >= 1) clearInterval(fade); }, 120); }); musica.onended = () => { actual = (actual + 1) % canciones.length; musica.src = canciones[actual]; musica.play(); }; }
+        document.addEventListener('DOMContentLoaded', () => { iniciarMusica(); setTimeout(() => document.getElementById('introOverlay').style.display = 'none', 2500); for (let i = 0; i < 100; i++) { const e = document.createElement('div'); e.className = 'estrella'; e.style.left = Math.random() * innerWidth + 'px'; e.style.top = Math.random() * innerHeight + 'px'; document.body.appendChild(e); } });
+        boton.addEventListener('click', () => { musica.play(); boton.style.display = 'none'; iniciarCorazones(); iniciarFugaces(); mostrarFoto(); });
+        reiniciar.addEventListener('click', () => location.reload());
+        playPause.addEventListener('click', () => { if (musica.paused) { musica.play(); playPause.textContent = '🔊'; } else { musica.pause(); playPause.textContent = '🔈'; } });
+        function mostrarFoto() { if (index >= fotos.length) { foto.style.display = 'none'; mensajeFinal.style.display = 'block'; reiniciar.style.display = 'inline-block'; return; } foto.style.opacity = 0; setTimeout(() => { blackhole.style.width = '800px'; blackhole.style.height = '800px'; blackhole.style.boxShadow = '0 0 240px #ff33ff'; }, 200); setTimeout(() => { foto.src = 'img/' + fotos[index]; foto.style.opacity = 1; generarParticulas(); index++; }, 900); setTimeout(() => { blackhole.style.width = '0'; blackhole.style.height = '0'; blackhole.style.boxShadow = '0 0 80px #aa00ff'; setTimeout(mostrarFoto, 1400); }, 2100); } function generarParticulas() { for (let i = 0; i < 30; i++) { const p = document.createElement('div'); p.className = 'particula'; const rX = foto.offsetLeft + Math.random() * foto.clientWidth; const rY = foto.offsetTop + Math.random() * foto.clientHeight; p.style.left = rX + 'px'; p.style.top = rY + 'px'; document.body.appendChild(p); setTimeout(() => p.remove(), 1500); } }
+        function iniciarCorazones() { setInterval(() => { const c = document.createElement('div'); c.className = 'corazon'; c.style.left = Math.random() * window.innerWidth + 'px'; c.style.top = window.innerHeight + 'px'; document.body.appendChild(c); setTimeout(() => c.remove(), 6000); }, 350); } function iniciarFugaces() { setInterval(() => { const f = document.createElement('div'); f.className = 'fugaz'; f.style.left = Math.random() * window.innerWidth + 'px'; f.style.top = Math.random() * window.innerHeight + 'px'; document.body.appendChild(f); setTimeout(() => f.remove(), 2000); }, 4500); }
+        const secretCheck = document.getElementById('secretCheck'); const secretInput = document.getElementById('secretInput'); const secretModal = new bootstrap.Modal(document.getElementById('secretModal')); const secretResult = new bootstrap.Modal(document.getElementById('secretResult'));
+        secretCheck.addEventListener('click', () => { const val = (secretInput.value || '').trim().toLowerCase(); if (val === 'chaufita') { secretModal.hide(); secretResult.show(); } else { secretInput.classList.add('is-invalid'); setTimeout(() => secretInput.classList.remove('is-invalid'), 1200); } });
+        let keybuf = ''; document.addEventListener('keydown', (e) => { keybuf += e.key.toLowerCase(); if (keybuf.length > 30) keybuf = keybuf.slice(-30); if (keybuf.includes('chaufita')) secretResult.show(); });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const heartContainer = document.createElement('div');
+            heartContainer.style.position = 'fixed';
+            heartContainer.style.top = 0;
+            heartContainer.style.left = 0;
+            heartContainer.style.width = '100%';
+            heartContainer.style.height = '100%';
+            heartContainer.style.pointerEvents = 'none';
+            document.body.appendChild(heartContainer);
 
-        let index = 0;
-        const foto = document.getElementById("foto");
-        const boton = document.getElementById("boton");
-        const reiniciar = document.getElementById("reiniciar");
-        const blackhole = document.getElementById("blackhole");
-        const mensajeFinal = document.getElementById("mensajeFinal");
-        const musica = document.getElementById("musica");
+            function explosionCorazones() {
+                for (let i = 0; i < 40; i++) {
+                    const h = document.createElement('div');
+                    h.textContent = '💗';
+                    h.style.position = 'absolute';
+                    h.style.fontSize = Math.random() * 30 + 20 + 'px';
+                    h.style.left = window.innerWidth / 2 + 'px';
+                    h.style.top = window.innerHeight / 2 + 'px';
+                    h.style.transition = 'transform 2s ease-out, opacity 2s';
+                    heartContainer.appendChild(h);
 
-        /* 🎧 FADE-IN SUAVE DE LA MÚSICA */
-        function fadeInMusic() {
-            musica.volume = 0;
-            let vol = 0;
-            const fade = setInterval(() => {
-                if (vol < 1) {
-                    vol += 0.02;
-                    musica.volume = vol;
-                } else {
-                    clearInterval(fade);
+                    setTimeout(() => {
+                        h.style.transform = `translate(${(Math.random() - 0.5) * 800}px, ${(Math.random() - 0.5) * 800}px) rotate(${Math.random() * 360}deg)`;
+                        h.style.opacity = 0;
+                    }, 50);
+
+                    setTimeout(() => h.remove(), 2500);
                 }
-            }, 120);
-        }
-
-        /* 🎵 Intentar reproducir desde el inicio */
-        document.addEventListener("DOMContentLoaded", () => {
-            musica.play()
-                .then(() => fadeInMusic())
-                .catch(() => { });
-        });
-
-        boton.addEventListener("click", () => {
-            musica.play().then(() => fadeInMusic()).catch(() => { });
-
-            boton.style.display = "none";
-            iniciarCorazones();
-            iniciarEstrellas();
-            iniciarFugaces();
-            mostrarFoto();
-        });
-
-        reiniciar.addEventListener("click", () => {
-            location.reload();
-        });
-
-        function mostrarFoto() {
-            if (index >= fotos.length) {
-                foto.style.display = "none";
-                mensajeFinal.style.display = "block";
-                reiniciar.style.display = "block";
-                return;
             }
 
-            foto.style.opacity = 0;
-
-            setTimeout(() => {
-                blackhole.style.width = "750px";
-                blackhole.style.height = "750px";
-                blackhole.style.boxShadow = "0 0 180px #ff33ff";
-            }, 200);
-
-            setTimeout(() => {
-                foto.src = "img/" + fotos[index];
-                foto.style.opacity = 1;
-                generarParticulas();
-                index++;
-            }, 900);
-
-            setTimeout(() => {
-                blackhole.style.width = "0";
-                blackhole.style.height = "0";
-                blackhole.style.boxShadow = "0 0 80px #aa00ff";
-                setTimeout(mostrarFoto, 1400);
-            }, 2100);
-        }
-
-        function generarParticulas() {
-            for (let i = 0; i < 30; i++) {
-                const p = document.createElement("div");
-                p.classList.add("particula");
-                p.style.left = (foto.offsetLeft + Math.random() * foto.clientWidth) + "px";
-                p.style.top = (foto.offsetTop + Math.random() * foto.clientHeight) + "px";
-                document.body.appendChild(p);
-                setTimeout(() => p.remove(), 1500);
-            }
-        }
-
-        function iniciarCorazones() {
-            setInterval(() => {
-                const c = document.createElement("div");
-                c.classList.add("corazon");
-                c.style.left = Math.random() * window.innerWidth + "px";
-                c.style.top = window.innerHeight + "px";
-                document.body.appendChild(c);
-                setTimeout(() => c.remove(), 6000);
-            }, 400);
-        }
-
-        function iniciarEstrellas() {
-            for (let i = 0; i < 120; i++) {
-                const e = document.createElement("div");
-                e.classList.add("estrella");
-                e.style.left = Math.random() * window.innerWidth + "px";
-                e.style.top = Math.random() * window.innerHeight + "px";
-                document.body.appendChild(e);
-            }
-        }
-
-        function iniciarFugaces() {
-            setInterval(() => {
-                const f = document.createElement("div");
-                f.classList.add("fugaz");
-                f.style.left = Math.random() * window.innerWidth + "px";
-                f.style.top = Math.random() * window.innerHeight + "px";
-                document.body.appendChild(f);
-                setTimeout(() => f.remove(), 2000);
-            }, 5000);
-        }
-
-        document.addEventListener("keydown", (e) => {
-            if (e.key.toLowerCase() === "c") {
-                alert("Mi Coral hermosa…\n\nEncontraste el mensaje secreto.\nEres una de las personas más especiales de mi vida.\nGracias por existir y por dejarme caminar a tu lado.\n\nSiempre tuyo… Alechi. 💗");
+            const finalMessage = document.getElementById('mensajeFinal');
+            if (finalMessage) {
+                const observer = new IntersectionObserver(entries => { if (entries[0].isIntersecting) explosionCorazones(); }, { threshold: 0.25 });
+                observer.observe(finalMessage);
             }
         });
     </script>
-
-    <!-- INTRO -->
-    <div id="intro" style="
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        background: black;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        color: white;
-        font-size: 32px;
-        z-index: 9999;
-        animation: introFade 3s forwards;
-    ">
-        <p style="animation: textoIntro 3s infinite alternate;">Para la chica más hermosa, "Mi preciosura"... 🌙💗</p>
-    </div>
-
-    <style>
-        @keyframes introFade {
-            0% {
-                opacity: 1;
-            }
-
-            100% {
-                opacity: 0;
-            }
-        }
-
-        @keyframes textoIntro {
-            0% {
-                opacity: 0.3;
-            }
-
-            100% {
-                opacity: 1;
-            }
-        }
-    </style>
-
-    <script>
-        setTimeout(() => {
-            document.getElementById("intro").style.display = "none";
-        }, 3000);
-    </script>
-
 </body>
 
 </html>
