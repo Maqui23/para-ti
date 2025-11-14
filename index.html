@@ -92,7 +92,6 @@
             }
         }
 
-        /* Corazones */
         .corazon {
             position: fixed;
             width: 20px;
@@ -134,7 +133,6 @@
             }
         }
 
-        /* Estrellas */
         .estrella {
             position: fixed;
             width: 3px;
@@ -155,7 +153,6 @@
             }
         }
 
-        /* Estrellas fugaces */
         .fugaz {
             position: fixed;
             width: 120px;
@@ -178,7 +175,6 @@
             }
         }
 
-        /* Partículas alrededor de la foto */
         .particula {
             position: absolute;
             width: 6px;
@@ -279,12 +275,13 @@
         Te amo con todo mi corazón. — Alechi 💕
     </div>
 
-    <audio id="musica" src="audio/cancion.mp3" autoplay></audio>
-
+    <!-- 🎵 AUDIO (actualizado con fade-in) -->
+    <audio id="musica" src="audio/cancion.mp3"></audio>
 
     <script>
         const fotos = [
-            "029fd9eccdbbaeb1f90f0cde252682dd_0.jpg",
+            "mua.jpg",
+            "hola.jpg",
             "20250610_174841.jpg",
             "20250711_172827.jpg",
             "IMG_20250816_174804.jpg",
@@ -309,7 +306,30 @@
         const mensajeFinal = document.getElementById("mensajeFinal");
         const musica = document.getElementById("musica");
 
+        /* 🎧 FADE-IN SUAVE DE LA MÚSICA */
+        function fadeInMusic() {
+            musica.volume = 0;
+            let vol = 0;
+            const fade = setInterval(() => {
+                if (vol < 1) {
+                    vol += 0.02;
+                    musica.volume = vol;
+                } else {
+                    clearInterval(fade);
+                }
+            }, 120);
+        }
+
+        /* 🎵 Intentar reproducir desde el inicio */
+        document.addEventListener("DOMContentLoaded", () => {
+            musica.play()
+                .then(() => fadeInMusic())
+                .catch(() => { });
+        });
+
         boton.addEventListener("click", () => {
+            musica.play().then(() => fadeInMusic()).catch(() => { });
+
             boton.style.display = "none";
             iniciarCorazones();
             iniciarEstrellas();
@@ -395,16 +415,14 @@
             }, 5000);
         }
 
-        /* 🔐 Mensaje secreto */
         document.addEventListener("keydown", (e) => {
             if (e.key.toLowerCase() === "c") {
-                alert("Mi Coral hermosa…\n\nSi estás leyendo esto, significa que encontraste el mensaje secreto.\nQuiero que sepas que eres una de las personas más especiales de mi vida.\nTu risa, tu mirada y tu forma de ser hacen que mi mundo sea más bonito.\nGracias por existir y por dejarme caminar a tu lado.\n\nSiempre tuyo… Alechi. 💗");
+                alert("Mi Coral hermosa…\n\nEncontraste el mensaje secreto.\nEres una de las personas más especiales de mi vida.\nGracias por existir y por dejarme caminar a tu lado.\n\nSiempre tuyo… Alechi. 💗");
             }
         });
-
     </script>
 
-    <!-- 🌟 Intro antes de comenzar -->
+    <!-- INTRO -->
     <div id="intro" style="
         position: fixed;
         top: 0;
