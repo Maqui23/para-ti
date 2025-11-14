@@ -267,21 +267,154 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+        // ---- IMÁGENES ----
         const fotos = ["mua.jpg", "hola.jpg", "20250610_174841.jpg", "20250711_172827.jpg", "IMG_20250816_174804.jpg", "IMG_20251104_212949.jpg", "IMG_20251104_213009.jpg", "IMG_20251104_213027.jpg", "IMG_20251109_211455.jpg", "IMG_20251109_211919.jpg", "IMG_20251109_212343.jpg", "IMG_20251109_212623.jpg", "IMG-20250603-WA0067.jpg", "IMG-20251101-WA0008.jpg", "IMG-20251110-WA0031.jpg", "Screenshot_20250610_194501_WhatsApp.jpg"];
-        let index = 0; const foto = document.getElementById('foto'); const boton = document.getElementById('boton'); const reiniciar = document.getElementById('reiniciar'); const blackhole = document.getElementById('blackhole'); const mensajeFinal = document.getElementById('mensajeFinal'); const musica = document.getElementById('musica'); const playPause = document.getElementById('playPause');
-        const canciones = ["audio/cancion1.mp3", "audio/cancion2.mp3", "audio/cancion3.mp3"]; let actual = 0;
-        function iniciarMusica() { actual = Math.floor(Math.random() * canciones.length); musica.src = canciones[actual]; musica.volume = 0; musica.play().then(() => { let v = 0; const fade = setInterval(() => { v += 0.02; musica.volume = Math.min(1, v); if (v >= 1) clearInterval(fade); }, 120); }); musica.onended = () => { actual = (actual + 1) % canciones.length; musica.src = canciones[actual]; musica.play(); }; }
-        document.addEventListener('DOMContentLoaded', () => { iniciarMusica(); setTimeout(() => document.getElementById('introOverlay').style.display = 'none', 2500); for (let i = 0; i < 100; i++) { const e = document.createElement('div'); e.className = 'estrella'; e.style.left = Math.random() * innerWidth + 'px'; e.style.top = Math.random() * innerHeight + 'px'; document.body.appendChild(e); } });
-        boton.addEventListener('click', () => { musica.play(); boton.style.display = 'none'; iniciarCorazones(); iniciarFugaces(); mostrarFoto(); });
+        let index = 0;
+        const foto = document.getElementById('foto');
+        const boton = document.getElementById('boton');
+        const reiniciar = document.getElementById('reiniciar');
+        const blackhole = document.getElementById('blackhole');
+        const mensajeFinal = document.getElementById('mensajeFinal');
+
+        // ---- MÚSICA ----
+        const musica = document.getElementById('musica');
+        const canciones = ["audio/cancion1.mp3", "audio/cancion2.mp3", "audio/cancion3.mp3"];
+        let actual = 0;
+
+        function reproducirMusica() {
+            actual = Math.floor(Math.random() * canciones.length);
+            musica.src = canciones[actual];
+            musica.volume = 0;
+            musica.play().then(() => {
+                let v = 0;
+                const fade = setInterval(() => {
+                    v += 0.02;
+                    musica.volume = Math.min(1, v);
+                    if (v >= 1) clearInterval(fade);
+                }, 120);
+            }).catch(e => console.log("Error reproducir música:", e));
+
+            musica.onended = () => {
+                actual = (actual + 1) % canciones.length;
+                reproducirMusica();
+            };
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => document.getElementById('introOverlay').style.display = 'none', 2500);
+            for (let i = 0; i < 100; i++) {
+                const e = document.createElement('div');
+                e.className = 'estrella';
+                e.style.left = Math.random() * innerWidth + 'px';
+                e.style.top = Math.random() * innerHeight + 'px';
+                document.body.appendChild(e);
+            }
+        });
+
+        // ---- EVENTOS BOTONES ----
+        boton.addEventListener('click', () => {
+            reproducirMusica();
+            boton.style.display = 'none';
+            iniciarCorazones();
+            iniciarFugaces();
+            mostrarFoto();
+        });
+
         reiniciar.addEventListener('click', () => location.reload());
-        playPause.addEventListener('click', () => { if (musica.paused) { musica.play(); playPause.textContent = '🔊'; } else { musica.pause(); playPause.textContent = '🔈'; } });
-        function mostrarFoto() { if (index >= fotos.length) { foto.style.display = 'none'; mensajeFinal.style.display = 'block'; reiniciar.style.display = 'inline-block'; return; } foto.style.opacity = 0; setTimeout(() => { blackhole.style.width = '800px'; blackhole.style.height = '800px'; blackhole.style.boxShadow = '0 0 240px #ff33ff'; }, 200); setTimeout(() => { foto.src = 'img/' + fotos[index]; foto.style.opacity = 1; generarParticulas(); index++; }, 900); setTimeout(() => { blackhole.style.width = '0'; blackhole.style.height = '0'; blackhole.style.boxShadow = '0 0 80px #aa00ff'; setTimeout(mostrarFoto, 1400); }, 2100); } function generarParticulas() { for (let i = 0; i < 30; i++) { const p = document.createElement('div'); p.className = 'particula'; const rX = foto.offsetLeft + Math.random() * foto.clientWidth; const rY = foto.offsetTop + Math.random() * foto.clientHeight; p.style.left = rX + 'px'; p.style.top = rY + 'px'; document.body.appendChild(p); setTimeout(() => p.remove(), 1500); } }
-        function iniciarCorazones() { setInterval(() => { const c = document.createElement('div'); c.className = 'corazon'; c.style.left = Math.random() * window.innerWidth + 'px'; c.style.top = window.innerHeight + 'px'; document.body.appendChild(c); setTimeout(() => c.remove(), 6000); }, 350); } function iniciarFugaces() { setInterval(() => { const f = document.createElement('div'); f.className = 'fugaz'; f.style.left = Math.random() * window.innerWidth + 'px'; f.style.top = Math.random() * window.innerHeight + 'px'; document.body.appendChild(f); setTimeout(() => f.remove(), 2000); }, 4500); }
-        const secretCheck = document.getElementById('secretCheck'); const secretInput = document.getElementById('secretInput'); const secretModal = new bootstrap.Modal(document.getElementById('secretModal')); const secretResult = new bootstrap.Modal(document.getElementById('secretResult'));
-        secretCheck.addEventListener('click', () => { const val = (secretInput.value || '').trim().toLowerCase(); if (val === 'chaufita') { secretModal.hide(); secretResult.show(); } else { secretInput.classList.add('is-invalid'); setTimeout(() => secretInput.classList.remove('is-invalid'), 1200); } });
-        let keybuf = ''; document.addEventListener('keydown', (e) => { keybuf += e.key.toLowerCase(); if (keybuf.length > 30) keybuf = keybuf.slice(-30); if (keybuf.includes('chaufita')) secretResult.show(); });
-    </script>
-    <script>
+
+        const playPause = document.getElementById('playPause');
+        playPause.addEventListener('click', () => {
+            if (musica.paused) { musica.play(); playPause.textContent = '🔊'; }
+            else { musica.pause(); playPause.textContent = '🔈'; }
+        });
+
+        // ---- FOTOS ----
+        function mostrarFoto() {
+            if (index >= fotos.length) {
+                foto.style.display = 'none';
+                mensajeFinal.style.display = 'block';
+                reiniciar.style.display = 'inline-block';
+                return;
+            }
+            foto.style.opacity = 0;
+            setTimeout(() => {
+                blackhole.style.width = '800px';
+                blackhole.style.height = '800px';
+                blackhole.style.boxShadow = '0 0 240px #ff33ff';
+            }, 200);
+            setTimeout(() => {
+                foto.src = 'img/' + fotos[index];
+                foto.style.opacity = 1;
+                generarParticulas();
+                index++;
+            }, 900);
+            setTimeout(() => {
+                blackhole.style.width = '0';
+                blackhole.style.height = '0';
+                blackhole.style.boxShadow = '0 0 80px #aa00ff';
+                setTimeout(mostrarFoto, 1400);
+            }, 2100);
+        }
+
+        function generarParticulas() {
+            for (let i = 0; i < 30; i++) {
+                const p = document.createElement('div');
+                p.className = 'particula';
+                const rX = foto.offsetLeft + Math.random() * foto.clientWidth;
+                const rY = foto.offsetTop + Math.random() * foto.clientHeight;
+                p.style.left = rX + 'px';
+                p.style.top = rY + 'px';
+                document.body.appendChild(p);
+                setTimeout(() => p.remove(), 1500);
+            }
+        }
+
+        // ---- CORAZONES Y FUGACES ----
+        function iniciarCorazones() {
+            setInterval(() => {
+                const c = document.createElement('div');
+                c.className = 'corazon';
+                c.style.left = Math.random() * window.innerWidth + 'px';
+                c.style.top = window.innerHeight + 'px';
+                document.body.appendChild(c);
+                setTimeout(() => c.remove(), 6000);
+            }, 350);
+        }
+
+        function iniciarFugaces() {
+            setInterval(() => {
+                const f = document.createElement('div');
+                f.className = 'fugaz';
+                f.style.left = Math.random() * window.innerWidth + 'px';
+                f.style.top = Math.random() * window.innerHeight + 'px';
+                document.body.appendChild(f);
+                setTimeout(() => f.remove(), 2000);
+            }, 4500);
+        }
+
+        // ---- MENSAJE SECRETO ----
+        const secretCheck = document.getElementById('secretCheck');
+        const secretInput = document.getElementById('secretInput');
+        const secretModal = new bootstrap.Modal(document.getElementById('secretModal'));
+        const secretResult = new bootstrap.Modal(document.getElementById('secretResult'));
+
+        secretCheck.addEventListener('click', () => {
+            const val = (secretInput.value || '').trim().toLowerCase();
+            if (val === 'chaufita') { secretModal.hide(); secretResult.show(); }
+            else {
+                secretInput.classList.add('is-invalid');
+                setTimeout(() => secretInput.classList.remove('is-invalid'), 1200);
+            }
+        });
+
+        let keybuf = '';
+        document.addEventListener('keydown', (e) => {
+            keybuf += e.key.toLowerCase();
+            if (keybuf.length > 30) keybuf = keybuf.slice(-30);
+            if (keybuf.includes('chaufita')) secretResult.show();
+        });
+
+        // ---- CORAZONES EXPLOSIÓN FINAL ----
         document.addEventListener('DOMContentLoaded', () => {
             const heartContainer = document.createElement('div');
             heartContainer.style.position = 'fixed';
