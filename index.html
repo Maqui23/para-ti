@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -19,9 +20,15 @@
             flex-direction: column;
             height: 100vh;
         }
+
         @keyframes fondo {
-            0% { background: radial-gradient(circle at center, #160040, #000); }
-            100% { background: radial-gradient(circle at center, #300070, #000); }
+            0% {
+                background: radial-gradient(circle at center, #160040, #000);
+            }
+
+            100% {
+                background: radial-gradient(circle at center, #300070, #000);
+            }
         }
 
         #blackhole {
@@ -46,7 +53,8 @@
             z-index: 4;
         }
 
-        #boton, #reiniciar {
+        #boton,
+        #reiniciar {
             padding: 15px 25px;
             font-size: 22px;
             border: none;
@@ -58,7 +66,9 @@
             transition: 0.3s;
             z-index: 5;
         }
-        #boton:hover, #reiniciar:hover {
+
+        #boton:hover,
+        #reiniciar:hover {
             background: #ff33aa;
         }
 
@@ -73,8 +83,13 @@
         }
 
         @keyframes brillo {
-            0% { text-shadow: 0 0 10px #ff33cc; }
-            100% { text-shadow: 0 0 25px #ff99ff; }
+            0% {
+                text-shadow: 0 0 10px #ff33cc;
+            }
+
+            100% {
+                text-shadow: 0 0 25px #ff99ff;
+            }
         }
 
         /* Corazones */
@@ -86,6 +101,7 @@
             transform: rotate(45deg);
             animation: flotar 6s linear infinite;
         }
+
         .corazon:before,
         .corazon:after {
             content: "";
@@ -95,12 +111,27 @@
             background: pink;
             border-radius: 50%;
         }
-        .corazon:before { top: -10px; left: 0; }
-        .corazon:after { left: -10px; top: 0; }
+
+        .corazon:before {
+            top: -10px;
+            left: 0;
+        }
+
+        .corazon:after {
+            left: -10px;
+            top: 0;
+        }
 
         @keyframes flotar {
-            0% { transform: translateY(0) rotate(45deg); opacity: 1; }
-            100% { transform: translateY(-250px) rotate(45deg); opacity: 0; }
+            0% {
+                transform: translateY(0) rotate(45deg);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-250px) rotate(45deg);
+                opacity: 0;
+            }
         }
 
         /* Estrellas */
@@ -113,9 +144,15 @@
             opacity: 0.8;
             animation: brillar 2s infinite alternate;
         }
+
         @keyframes brillar {
-            0% { opacity: 0.3; }
-            100% { opacity: 1; }
+            0% {
+                opacity: 0.3;
+            }
+
+            100% {
+                opacity: 1;
+            }
         }
 
         /* Estrellas fugaces */
@@ -128,9 +165,17 @@
             opacity: 0;
             animation: fugaz 2s linear;
         }
+
         @keyframes fugaz {
-            0% { opacity: 1; transform: translateX(0) translateY(0) rotate(-45deg); }
-            100% { opacity: 0; transform: translateX(400px) translateY(-400px) rotate(-45deg); }
+            0% {
+                opacity: 1;
+                transform: translateX(0) translateY(0) rotate(-45deg);
+            }
+
+            100% {
+                opacity: 0;
+                transform: translateX(400px) translateY(-400px) rotate(-45deg);
+            }
         }
 
         /* Partículas alrededor de la foto */
@@ -142,17 +187,37 @@
             border-radius: 50%;
             animation: part 1.5s linear infinite;
         }
+
         @keyframes part {
-            0% { opacity: 1; transform: scale(1); }
-            100% { opacity: 0; transform: scale(2); }
+            0% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            100% {
+                opacity: 0;
+                transform: scale(2);
+            }
         }
-    @keyframes latido {
-            0% { transform: scale(1); }
-            100% { transform: scale(1.05); }
+
+        @keyframes latido {
+            0% {
+                transform: scale(1);
+            }
+
+            100% {
+                transform: scale(1.05);
+            }
         }
+
         @keyframes zoom {
-            0% { transform: scale(1); }
-            100% { transform: scale(1.12); }
+            0% {
+                transform: scale(1);
+            }
+
+            100% {
+                transform: scale(1.12);
+            }
         }
 
         .boomCorazones {
@@ -163,6 +228,7 @@
             transform: rotate(45deg);
             animation: explotar 1.2s ease-out forwards;
         }
+
         .boomCorazones:before,
         .boomCorazones:after {
             content: "";
@@ -172,16 +238,31 @@
             background: #ff99cc;
             border-radius: 50%;
         }
-        .boomCorazones:before { top: -8px; left: 0; }
-        .boomCorazones:after { left: -8px; top: 0; }
 
-        @keyframes explotar {
-            0% { opacity: 1; transform: scale(0.5) translate(0,0); }
-            100% { opacity: 0; transform: scale(2) translate(var(--x), var(--y)); }
+        .boomCorazones:before {
+            top: -8px;
+            left: 0;
         }
 
+        .boomCorazones:after {
+            left: -8px;
+            top: 0;
+        }
+
+        @keyframes explotar {
+            0% {
+                opacity: 1;
+                transform: scale(0.5) translate(0, 0);
+            }
+
+            100% {
+                opacity: 0;
+                transform: scale(2) translate(var(--x), var(--y));
+            }
+        }
     </style>
 </head>
+
 <body>
     <button id="boton">Comenzar</button>
     <button id="reiniciar" style="display:none;">Reiniciar</button>
@@ -198,26 +279,27 @@
         Te amo con todo mi corazón. — Alechi 💕
     </div>
 
-    <audio id="musica" src="tu_cancion.mp3" autoplay></audio>
+    <audio id="musica" src="audio/cancion.mp3" autoplay></audio>
+
 
     <script>
         const fotos = [
-    "029fd9eccdbbaeb1f90f0cde252682dd_0.jpg",
-    "20250610_174841.jpg",
-    "20250711_172827.jpg",
-    "IMG_20250816_174804.jpg",
-    "IMG_20251104_212949.jpg",
-    "IMG_20251104_213009.jpg",
-    "IMG_20251104_213027.jpg",
-    "IMG_20251109_211455.jpg",
-    "IMG_20251109_211919.jpg",
-    "IMG_20251109_212343.jpg",
-    "IMG_20251109_212623.jpg",
-    "IMG-20250603-WA0067.jpg",
-    "IMG-20251101-WA0008.jpg",
-    "IMG-20251110-WA0031.jpg",
-    "Screenshot_20250610_194501_WhatsApp.jpg"
-];
+            "029fd9eccdbbaeb1f90f0cde252682dd_0.jpg",
+            "20250610_174841.jpg",
+            "20250711_172827.jpg",
+            "IMG_20250816_174804.jpg",
+            "IMG_20251104_212949.jpg",
+            "IMG_20251104_213009.jpg",
+            "IMG_20251104_213027.jpg",
+            "IMG_20251109_211455.jpg",
+            "IMG_20251109_211919.jpg",
+            "IMG_20251109_212343.jpg",
+            "IMG_20251109_212623.jpg",
+            "IMG-20250603-WA0067.jpg",
+            "IMG-20251101-WA0008.jpg",
+            "IMG-20251110-WA0031.jpg",
+            "Screenshot_20250610_194501_WhatsApp.jpg"
+        ];
 
         let index = 0;
         const foto = document.getElementById("foto");
@@ -343,8 +425,25 @@
     </div>
 
     <style>
-        @keyframes introFade { 0% {opacity:1;} 100% {opacity:0;} }
-        @keyframes textoIntro { 0% {opacity:0.3;} 100% {opacity:1;} }
+        @keyframes introFade {
+            0% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+            }
+        }
+
+        @keyframes textoIntro {
+            0% {
+                opacity: 0.3;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
     </style>
 
     <script>
@@ -354,4 +453,5 @@
     </script>
 
 </body>
+
 </html>
